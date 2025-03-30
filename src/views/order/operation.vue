@@ -15,12 +15,13 @@
     </el-select>
     <p>
       selected option's description:
-      {{ value ? value.desc : 'no select' }}
+      {{ value ? value : 'no select' }}
     </p>
     <el-select
       v-model="value"
       value-key="name"
       placeholder="Select"
+      multiple
       @change="optionChange"
       style="width: 240px">
       <el-option
@@ -45,6 +46,10 @@
   const value = ref('')
   const optionChange = (val: any) => {
     console.log('optionChange', val)
-    setDisabled(props.changeDisabledName, val.belong)
+    let belongs = Array.isArray(val)
+      ? val.map((item) => item.belong)
+      : [val.belong]
+    console.log(belongs)
+    setDisabled(props.changeDisabledName, belongs)
   }
 </script>

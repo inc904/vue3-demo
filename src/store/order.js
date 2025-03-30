@@ -3,36 +3,11 @@ import { ref } from 'vue'
 
 export const useOrdersStore = defineStore('order', () => {
   const options = ref([
-    {
-      name: 'testA',
-      belong: 'testA',
-      disabledA: true,
-      disabledB: false,
-    },
-    {
-      name: 'testB',
-      belong: 'testB',
-      disabledA: false,
-      disabledB: true,
-    },
-    {
-      name: 'testC',
-      belong: 'testC',
-      disabledA: false,
-      disabledB: false,
-    },
-    {
-      name: 'testD',
-      belong: 'testD',
-      disabledA: false,
-      disabledB: false,
-    },
-    {
-      name: 'testE',
-      belong: 'testE',
-      disabledA: false,
-      disabledB: false,
-    },
+    { name: 'testA', belong: 'testA', disabledA: true, disabledB: false },
+    { name: 'testB', belong: 'testB', disabledA: false, disabledB: true },
+    { name: 'testC', belong: 'testC', disabledA: false, disabledB: false },
+    { name: 'testD', belong: 'testD', disabledA: false, disabledB: false },
+    { name: 'testE', belong: 'testE', disabledA: false, disabledB: false },
   ])
 
   const acc = ref([
@@ -42,33 +17,33 @@ export const useOrdersStore = defineStore('order', () => {
     { name: 'Jack4', belong: 'testC', disabledA: false, disabledB: false },
   ])
 
-  const setDisabled = (comp, belong, type) => {
-    console.log(comp, belong)
+  const setDisabled = (comp, belongs, type) => {
+    console.log(comp, belongs)
 
     options.value.forEach((item) => {
       console.log(
         'setDisabled-group',
         item.belong,
-        belong,
-        item.belong === belong
+        belongs,
+        belongs.includes(item.belong)
       )
       item.disabledA =
-        item.belong === belong && comp === 'disabledA' ? true : false
+        belongs.includes(item.belong) && comp === 'disabledA' ? true : false
       item.disabledB =
-        item.belong === belong && comp === 'disabledB' ? true : false
+        belongs.includes(item.belong) && comp === 'disabledB' ? true : false
     })
 
     acc.value.forEach((item) => {
       console.log(
         'setDisabled-acc',
         item.belong,
-        belong,
-        item.belong === belong
+        belongs,
+        belongs.includes(item.belong)
       )
       item.disabledA =
-        item.belong === belong && comp === 'disabledA' ? true : false
+        belongs.includes(item.belong) && comp === 'disabledA' ? true : false
       item.disabledB =
-        item.belong === belong && comp === 'disabledB' ? true : false
+        belongs.includes(item.belong) && comp === 'disabledB' ? true : false
     })
   }
   // setDisabled('disabledB', 'testA')
